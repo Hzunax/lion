@@ -611,24 +611,24 @@ describe('<lion-fieldset>', () => {
       const fieldset = await fixture(`<${tagString}>${inputSlotString}</${tagString}>`);
       await nextFrame();
       // Safety check initially
-      fieldset._setValueForAllFormElements('dirty', true);
-      fieldset._setValueForAllFormElements('touched', true);
-      fieldset._setValueForAllFormElements('prefilled', true);
+      await fieldset._setValueForAllFormElements('dirty', true);
+      await fieldset._setValueForAllFormElements('touched', true);
+      await fieldset._setValueForAllFormElements('prefilled', true);
       expect(fieldset.dirty).to.equal(true, '"dirty" initially');
       expect(fieldset.touched).to.equal(true, '"touched" initially');
       expect(fieldset.prefilled).to.equal(true, '"prefilled" initially');
 
       // Reset all children states, with prefilled false
-      fieldset._setValueForAllFormElements('modelValue', {});
+      await fieldset._setValueForAllFormElements('modelValue', {});
       fieldset.resetInteractionState();
       expect(fieldset.dirty).to.equal(false, 'not "dirty" after reset');
       expect(fieldset.touched).to.equal(false, 'not "touched" after reset');
       expect(fieldset.prefilled).to.equal(false, 'not "prefilled" after reset');
 
       // Reset all children states with prefilled true
-      fieldset._setValueForAllFormElements('dirty', true);
-      fieldset._setValueForAllFormElements('touched', true);
-      fieldset._setValueForAllFormElements('modelValue', { checked: true }); // not prefilled
+      await fieldset._setValueForAllFormElements('dirty', true);
+      await fieldset._setValueForAllFormElements('touched', true);
+      await fieldset._setValueForAllFormElements('modelValue', { checked: true }); // not prefilled
       fieldset.resetInteractionState();
       expect(fieldset.dirty).to.equal(false, 'not "dirty" after 2nd reset');
       expect(fieldset.touched).to.equal(false, 'not "touched" after 2nd reset');

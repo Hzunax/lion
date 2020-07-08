@@ -214,7 +214,10 @@ export class LionFieldset extends FormControlMixin(
     return values;
   }
 
-  _setValueForAllFormElements(property, value) {
+  async _setValueForAllFormElements(property, value) {
+    if (!this.__readyForRegistration) {
+      await this.registrationReady;
+    }
     this.formElementsArray.forEach(el => {
       el[property] = value; // eslint-disable-line no-param-reassign
     });
